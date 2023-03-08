@@ -18,7 +18,7 @@ public class User
     [Required]
     public string Password { get; set; } = string.Empty;
 
-    public string ProfilePicture { get; set; } = string.Empty;
+    public string ProfilePicture { get; set; } = "/images/default-user-img.jpg";
 
     public List<Book> BooksMarked { get; set; } = new();
 }

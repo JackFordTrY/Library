@@ -9,6 +9,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.Property(b => b.ProfilePicture)
-               .HasDefaultValue("/images/empty-book-img.png");
+               .HasDefaultValue("/images/default-user-img.jpg");
     }
 }
