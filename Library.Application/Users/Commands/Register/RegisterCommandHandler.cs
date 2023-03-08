@@ -18,7 +18,7 @@ public class RegisterCommandHandler: IRequestHandler<RegisterCommand>
 
     public Task Handle(RegisterCommand command, CancellationToken cancellationToken)
     {
-        if(_repository.UserExists(command.Login, command.Email).Result) 
+        if(_repository.UserExistsAsync(command.Login, command.Email).Result) 
         {
             throw new UserAlreadyExistsException();
         }

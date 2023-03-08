@@ -21,12 +21,12 @@ public class UserRepositoryService : IUserRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<User?> GetUserByLogin(string username)
+    public async Task<User?> GetUserByLoginAsync(string username)
     {
         return await _context.Users.FirstOrDefaultAsync(u => u.Login == username);
     }
 
-    public async Task<bool> UserExists(string username, string email)
+    public async Task<bool> UserExistsAsync(string username, string email)
     {
         return await _context.Users.AnyAsync(u => u.Login == username || u.Email == email);
     }

@@ -12,7 +12,7 @@ public static class DependencyInjection
     {
         services.AddTransient<IPasswordEncryption, PasswordEncryptionService>();
         services.AddTransient<IUserRepository, UserRepositoryService>();
-
+        services.AddTransient<IBookRepository, BookRepositoryService>();
         services.AddDbContext<ApplicationDbContext>();
 
         return services;
