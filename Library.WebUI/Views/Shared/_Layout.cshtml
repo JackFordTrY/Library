@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MyLib | @ViewBag.Title</title>
+
+
+   <link rel="stylesheet" href="~/css/bootstrap.css" />
+
+   <link rel="stylesheet" href="~/css/mainstyle.css" />
+
+   <link rel="shortcut icon" type="image/png" href="/images/favicon16x16.png">
+
+    
+</head>
+<body>
+    
+    <div class="container-md justify-content-center">
+        <nav style="padding:5px;" class="navbar navbar-expand-lg navbar-dark bg-dark rounded-bottom-1">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Main page</a>
+
+                <div>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <a class="btn btn-dark" href="/user/login">Log In</a>
+                        <a class="btn btn-secondary" href="/user/register">Sign In</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-light" href="/user/@User.FindFirst("Name")">My profile</a>
+                        <a class="btn btn-secondary" href="/user/logout">Log out</a>
+                    }
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    @RenderBody()
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
