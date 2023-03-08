@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <ProjectReference Include="..\Library.Contracts\Library.Contracts.csproj" />
+    <ProjectReference Include="..\Library.Infrastructure\Library.Infrastructure.csproj" />
   </ItemGroup>
-
 </Project>

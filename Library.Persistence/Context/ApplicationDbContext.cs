@@ -20,6 +20,6 @@ public class ApplicationDbContext: DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
     {
-        optionsBuilder.UseSqlite("Data source = ../database.db");
+        optionsBuilder.UseSqlite("Data source = ../Library.Persistence/database.db");
     }
 }
