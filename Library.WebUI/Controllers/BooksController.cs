@@ -5,6 +5,7 @@ using Library.Contracts.BookContracts;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Library.WebUI.Controllers;
 
@@ -42,5 +43,13 @@ public class BooksController : Controller
         }
 
         return View(_mapper.Map<GetBookByTitleRequest>(response));
+    }
+    
+    [Route("/BooksList")]
+    public async Task<IActionResult> BooksListPartial(string sort, int page = 1)
+    {
+        var response = await _mediator.Send(new GetAllBooksQuery(page, sort));
+
+        return PartialView("_BooksListPartial", _mapper.Map<GetAllBookRequest>(response));
     }
 }

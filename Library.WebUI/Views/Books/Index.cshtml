@@ -7,71 +7,17 @@
 }
 
 <div class="d-flex container-md justify-content-center ">
-    <div class="grid-container">
-        @foreach (var book in Model.Books)
-        {
-            <div class="grid-item">
-                <a href="/@book.Title.ToLower()"><img src="@book.Cover" height="141" width="85"></a>
-                <br>
-                <a class="grid-item-text-link" href="/@book.Title.ToLower()">@book.Title</a>
-                <br>
-                <p style="color:black;">@book.Date</p>
-            </div>
-        }
+    <div class="grid-container" id="gridContainer">
+        
     </div>
 </div>
 
 <div class="d-flex justify-content-center">
-     <ul class="pagination">
+    <ul class="pagination" id="paginationList">
 
-        <li class="page-item">
-            <a class="page-link" href="/?page=1&sort=@Model.Sort">1</a>
-        </li>
-
-        @if (Model.Page == 1 && last == 1)
-        {
-
-        }
-        else
-        {
-            if (Model.Page > 4)
-            {
-                <li class="page-item">
-                    <a class="page-link" href="/?page=@(Model.Page -3)&sort=@Model.Sort">...</a>
-                </li>
-            }
-
-            int r = 2, r1 = Model.Page - r, r2 = Model.Page + r;
-
-            for (int i = r1 > 2 ? r1 : 2; i <= Math.Min(r2, last); i++)
-            {
-                if (i == Model.Page)
-                {
-                    <li class="page-item ">
-                        <a class="page-link active" href="/?page=@i&sort=@Model.Sort">@i</a>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item">
-                        <a class="page-link" href="/?page=@i&sort=@Model.Sort">@i</a>
-                    </li>
-                }
-            }
-
-            if (r2 + 1 < last)
-            {
-                <li class="page-item">
-                    <a class="page-link" href="/?page=@(r2+1)&sort=@Model.Sort">...</a>
-                </li>
-            }
-
-            if (r2 < last)
-            {
-                <li class="page-item">
-                    <a class="page-link" href="/?page=@last&sort=@Model.Sort">@last</a>
-                </li>
-            }
-        }
-     </ul>
+    </ul>
 </div>
+
+<script src="js/books.js"></script>
+
+
