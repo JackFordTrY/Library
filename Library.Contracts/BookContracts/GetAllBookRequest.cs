@@ -3,7 +3,7 @@
 namespace Library.Contracts.BookContracts;
 
 public record GetAllBookRequest(
-    IEnumerable<BookDto> Books,
+    IEnumerable<DisplayBookDto> Books,
     int Page,
     string Sort,
     int Count);

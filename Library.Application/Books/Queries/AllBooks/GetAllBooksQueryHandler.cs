@@ -17,7 +17,7 @@ public class GetAllBooksQueryHandler : IRequestHandler<GetAllBooksQuery, GetAllB
     {
         var books = _repository.GetAllBooks(query.Page, query.Sort);
 
-        var booksDto = books.Select(b => new BookDto(
+        var booksDto = books.Select(b => new DisplayBookDto(
             b.Title,
             b.Date,
             b.Cover,

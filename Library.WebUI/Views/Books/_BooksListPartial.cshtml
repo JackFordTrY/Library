@@ -3,9 +3,9 @@
 @foreach (var book in Model.Books)
 {
     <div class="grid-item">
-        <a href="/@book.Title.ToLower()"><img src="@book.Cover" height="141" width="85"></a>
+        <a href="/@book.Title.ToLower()"><img src="@book.Cover" height="141" width="87" alt="@book.Title"></a>
         <br>
-        <a class="grid-item-text-link" href="/@book.Title.ToLower()">@book.Title</a>
+        <a class="grid-item-text-link" href="/@book.Title.ToLower()" aria-label="@book.Title">@book.Title</a>
         <br>
         <p style="color:black;">@book.Date</p>
     </div>

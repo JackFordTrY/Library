@@ -1,12 +1,8 @@
-
-
 .grid-container {
     display:grid;
-    grid-template-columns: repeat(6,1fr);
+    grid-template-columns: repeat(5,1fr);
     grid-template-rows: repeat(4,200px);
     justify-content: center;
-    grid-column-gap: 1%;
-    grid-row-gap: 2px;
 }
 
 @media(max-width: 992px) {
@@ -52,4 +48,38 @@
 
 .grid-item-text-link:hover {
     color: Highlight
+}
+
+.search{
+    position:fixed;
+    background: rgba(0,0,0,0.5);
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    text-align:center;
+    z-index:4;
+}
+
+.search-input {
+    width: 600px;
+    height: 50px;
+    background: white;
+    color: black;
+    border: 0 solid transparent;
+    border-radius: 5px;
+}
+
+.search-container{
+    margin:auto;
+    width:600px;
+    border-radius:5px;
+}
+
+.search-item {
+    background: #303030;
+    font-size: 1.5rem;
+}
+.hidden {
+    display: none;
 }

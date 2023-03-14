@@ -3,4 +3,4 @@
 namespace Library.Application.Books.Queries.BookByTitle;
 
 public record GetBookByTitleResponse(
-    BookDto Book);
+    DisplayBookDto Book);

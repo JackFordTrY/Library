@@ -1,0 +1,17 @@
+﻿@model SearchBookRequest
+
+@if(Model.Books is null || Model.Books.Count() < 1)
+{
+    <div class="search-item">
+        <p style="margin-bottom: 0;">Nothing was found!</p>
+    </div>
+}
+else
+{
+    @foreach(var book in Model.Books){
+        <div class="search-item">
+            <p style="margin-bottom: 0;">@book.Title / @book.AuthorName</p>
+            <hr style="margin: 0 0;">
+        </div>
+    }
+}

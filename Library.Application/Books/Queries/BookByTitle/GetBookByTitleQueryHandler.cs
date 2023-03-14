@@ -23,7 +23,7 @@ public class GetBookByTitleQueryHandler : IRequestHandler<GetBookByTitleQuery, G
             throw new BookNotFoundException();
         }
 
-        var bookDto = new BookDto(
+        var bookDto = new DisplayBookDto(
             book.Title,
             book.Date,
             book.Cover,

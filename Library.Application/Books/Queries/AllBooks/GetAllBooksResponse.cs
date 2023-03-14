@@ -3,7 +3,7 @@
 namespace Library.Application.Books.Queries.AllBooks;
 
 public record GetAllBooksResponse(
-    IEnumerable<BookDto> Books,
+    IEnumerable<DisplayBookDto> Books,
     int Page,
     string Sort,
     int Count);
