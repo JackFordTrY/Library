@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Library.Application.Books.Queries.SearchBook;
 
-public class SearchBookQueryHandler : IRequestHandler<SearchBookQuery, SearchBookResponse>
+public class SearchBookQueryHandler : IRequestHandler<SearchBookQuery, SearchBookQueryResponse>
 {
     private readonly IBookRepository _repository;
 
@@ -13,17 +13,17 @@ public class SearchBookQueryHandler : IRequestHandler<SearchBookQuery, SearchBoo
         _repository = repository;
     }
 
-    public Task<SearchBookResponse> Handle(SearchBookQuery query, CancellationToken cancellationToken)
+    public Task<SearchBookQueryResponse> Handle(SearchBookQuery query, CancellationToken cancellationToken)
     {
         var books = _repository.SearchByString(query.SearchString);
 
-        if (books == null) return Task.FromResult(new SearchBookResponse(null!));
+        if (books == null) return Task.FromResult(new SearchBookQueryResponse(null!));
 
         var booksDto = books.Select(b => new SearchQueryBookDto(
             b.Title, 
             b.Author is null ? string.Empty : b.Author.AuthorName
             ));
 
-        return Task.FromResult(new SearchBookResponse(booksDto));
+        return Task.FromResult(new SearchBookQueryResponse(booksDto));
     }
 }

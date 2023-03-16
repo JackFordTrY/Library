@@ -3,4 +3,4 @@
 namespace Library.Application.Books.Queries.AllBooks;
 public record GetAllBooksQuery(
     int Page,
-    string Sort) : IRequest<GetAllBooksResponse>;
+    string Sort) : IRequest<GetAllBooksQueryResponse>;

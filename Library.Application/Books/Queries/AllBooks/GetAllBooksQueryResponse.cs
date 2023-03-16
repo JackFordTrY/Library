@@ -2,7 +2,7 @@
 
 namespace Library.Application.Books.Queries.AllBooks;
 
-public record GetAllBooksResponse(
+public record GetAllBooksQueryResponse(
     IEnumerable<DisplayBookDto> Books,
     int Page,
     string Sort,

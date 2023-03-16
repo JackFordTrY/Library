@@ -2,4 +2,4 @@
 
 namespace Library.Application.Books.Queries.SearchBook;
 
-public record SearchBookResponse(IEnumerable<SearchQueryBookDto> Books);
+public record SearchBookQueryResponse(IEnumerable<SearchQueryBookDto> Books);

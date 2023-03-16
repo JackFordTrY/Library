@@ -2,7 +2,7 @@
 
 namespace Library.Contracts.BookContracts;
 
-public record GetAllBookRequest(
+public record GetAllBookResponse(
     IEnumerable<DisplayBookDto> Books,
     int Page,
     string Sort,

@@ -2,5 +2,5 @@
 
 namespace Library.Application.Books.Queries.BookByTitle;
 
-public record GetBookByTitleResponse(
+public record GetBookByTitleQueryResponse(
     DisplayBookDto Book);

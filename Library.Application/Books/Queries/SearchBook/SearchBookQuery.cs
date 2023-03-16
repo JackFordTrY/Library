@@ -2,4 +2,4 @@
 
 namespace Library.Application.Books.Queries.SearchBook;
 
-public record SearchBookQuery(string SearchString): IRequest<SearchBookResponse>;
+public record SearchBookQuery(string SearchString): IRequest<SearchBookQueryResponse>;

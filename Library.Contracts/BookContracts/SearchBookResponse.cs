@@ -2,4 +2,4 @@
 
 namespace Library.Contracts.BookContracts;
 
-public record SearchBookRequest(IEnumerable<SearchQueryBookDto> Books);
+public record SearchBookResponse(IEnumerable<SearchQueryBookDto> Books);

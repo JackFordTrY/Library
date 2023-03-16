@@ -33,7 +33,7 @@ public class BooksController : Controller
     [Route("/{title}")]
     public async Task<IActionResult> BookPage(string title)
     {
-        GetBookByTitleResponse response;
+        GetBookByTitleQueryResponse response;
 
         try
         {
@@ -52,7 +52,7 @@ public class BooksController : Controller
     {
         var response = await _mediator.Send(new GetAllBooksQuery(page, sort));
 
-        return PartialView("_BooksListPartial", _mapper.Map<GetAllBookRequest>(response));
+        return PartialView("_BooksListPartial", _mapper.Map<GetAllBookResponse>(response));
     }
 
     [Route("/SearchBooks")]
@@ -60,6 +60,6 @@ public class BooksController : Controller
     {
         var response = await _mediator.Send(new SearchBookQuery(search));
 
-        return PartialView("_SearchBooksPartial", _mapper.Map<SearchBookRequest>(response));
+        return PartialView("_SearchBooksPartial", _mapper.Map<SearchBookResponse>(response));
     }
 }
