@@ -1,10 +1,10 @@
 const search = document.querySelector(".search");
 
-const toggle = document.getElementById("search-toggle");
+const toggle = document.querySelector(".search-toggle");
 
-const input = document.getElementById("search-input");
+const input = document.querySelector(".search-input");
 
-const container = document.getElementById("search-container");
+const container = document.querySelector(".search-container");
 
 const debounceSearch = debounce(drawSearchResault);
 
