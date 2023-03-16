@@ -19,7 +19,7 @@ public class BookRepositoryService : IBookRepository
 
     public IEnumerable<Book> GetAllBooks(int page, string sort)
     {
-        var books = _context.Books.Select(b => b).Skip((page - 1) * 20).Take(20);
+        var books = _context.Books.Select(b => b).Include(b => b.Author).Skip((page - 1) * 20).Take(20);
 
         switch (sort)
         {
@@ -44,7 +44,7 @@ public class BookRepositoryService : IBookRepository
     {
         if (string.IsNullOrEmpty(search)) return null;
 
-        return _context.Books.Select(b => b).Where(b=>b.Title.ToLower().Contains(search.ToLower())).AsEnumerable();
+        return _context.Books.Select(b => b).Where(b=>b.Title.ToLower().Contains(search.ToLower())).Include(b => b.Author).AsEnumerable();
     } 
 
     public async Task<Book?> GetBookByTitleAsync(string title)
