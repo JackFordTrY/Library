@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Library.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace Library.Domain.Entities;
 
@@ -21,4 +22,6 @@ public class Book
     public string? Description { get; set; }
 
     public List<User> UsersMarked { get; set; } = new();
+
+    public BookGenre Genre { get; set; }
 }
