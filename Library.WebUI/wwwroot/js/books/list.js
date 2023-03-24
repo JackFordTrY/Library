@@ -1,74 +1,78 @@
-window.onload = drawList(1);
+let curPage = 1;
+let isAvailable = false
 
-function drawList(page = 1, sort = "title") {
+let gridContainer;
 
-    let container = document.getElementById("gridContainer");
+const gridWrap = document.getElementById("gridwrap");
 
-    fetch("/BooksList?" + new URLSearchParams({
-        page: page,
-        sort: sort
-    }))
-    .then(response => response.text())
-    .then(text => container.innerHTML = text);
+window.onload = loadList();
 
-    drawPagination(page);
-}
 
-function drawPagination(curpage) {
-    
-    let pagionationContainer = document.getElementById("paginationList");
+function loadList() {
 
-    let pageButtons = document.getElementsByClassName("page-link");
 
-    const pagionationList = pagination(curpage, +pagionationContainer.getAttribute('data-pages-amount')).map((btn) => {
-        if (btn == curpage) {
-            return `
-                    <li class="page-item">
-                        <p class="page-link active">${btn}</p>
-                    </li>
-                `;
-        }
-        return `
-                <li class="page-item">
-                    <p class="page-link">${btn}</p>
-                </li>
-            `;
-    }).join("");
+    if (curPage == 1) {
+        let loader =
+        `
+            <span class="loader"></span>
+        `;
 
-    pagionationContainer.innerHTML = pagionationList;
-
-    for (let i = 0; i < pageButtons.length; i++) {
-        pageButtons.item(i).addEventListener("click", () => drawList(pageButtons.item(i).innerHTML))
+        gridWrap.innerHTML = loader;
     }
-}
 
-function pagination(c, m) {
-        let current = c,
-            last = m,
-            delta = 2,
-            left = current - delta,
-            right = current + delta + 1,
-            range = [],
-            rangeWithDots = [],
-            l;
 
-        for (let i = 1; i <= last; i++) {
-            if (i == 1 || i == last || i >= left && i < right) {
-                range.push(i);
-            }
+    fetch("/list?" + new URLSearchParams({
+        page: curPage
+    }))
+    .then(response => response.json())
+    .then(data => {
+        gridWrap.innerHTML = 
+        `
+            <div class="grid-container" id="gridcontainer"></div>
+        `;
+        if (data.hasNextPage) {
+            curPage++;
         }
+        gridContainer = document.getElementById("gridcontainer")
+        updateList(data.books)
+    });
+};
 
-        for (let i of range) {
-            if (l) {
-                if (i - l === 2) {
-                    rangeWithDots.push(l + 1);
-                } else if (i - l !== 1) {
-                    rangeWithDots.push('...');
-                }
+window.addEventListener("scroll", () => {
+    console.log("scroll");
+
+    if (window.scrollY + window.innerHeight >= document.body.offsetHeight * 0.9
+        && !isAvailable
+    )
+    {
+        isAvailable = !isAvailable;
+
+        fetch("/list?" + new URLSearchParams({
+            page: curPage
+        }))
+        .then(response => response.json())
+        .then(data => {
+            if (data.hasNextPage) {
+                curPage++;
+                isAvailable = !isAvailable;
             }
-            rangeWithDots.push(i);
-            l = i;
-        }
+            updateList(data.books);
+        });
+    }
+});
 
-        return rangeWithDots;
+function updateList(books){
+
+    const booksHtml = books.map(b =>
+        `
+            <div class="grid-item">
+                <a href="/${b.title.toLowerCase()}"><img src="${b.cover}" height="141" width="87" alt="${b.title}"></a>
+                <br>
+                <a class="grid-item-text-link" href="/${b.title.toLowerCase()}" aria-label="${b.title}">${b.title}</a>
+                <br>
+                <p style="color:black;">${b.date}</p>
+            </div>
+    `).join('');
+
+    gridContainer.innerHTML += booksHtml;    
 }

@@ -6,7 +6,7 @@ public interface IBookRepository
 {
     public int BookCount { get; }
 
-    IEnumerable<Book> GetAllBooks(int page, string sort);
+    IEnumerable<Book> GetAllBooks(int page, int count);
 
     public IEnumerable<Book>? SearchByString(string search);
 

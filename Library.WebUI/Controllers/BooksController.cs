@@ -14,20 +14,17 @@ public class BooksController : Controller
 {
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
-    private readonly IBookRepository _repository;
 
-    public BooksController(IMediator mediator, IMapper mapper, IBookRepository repository)
+    public BooksController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
         _mapper = mapper;
-        _repository = repository;
     }
 
     [Route("/")]
     public IActionResult Index()
     {
-        var pages = Math.Ceiling((float)_repository.BookCount / 20);
-        return View(pages);
+        return View();
     }
 
     [Route("/{title}")]
@@ -46,20 +43,12 @@ public class BooksController : Controller
 
         return View(_mapper.Map<GetBookByTitleRequest>(response));
     }
-    
-    [Route("/BooksList")]
-    public async Task<IActionResult> BooksListPartial(string sort, int page = 1)
+
+    [Route("/list")]
+    public async Task<IActionResult> BookList(GetAllBooksQuery query)
     {
-        var response = await _mediator.Send(new GetAllBooksQuery(page, sort));
+        var response = await _mediator.Send(query);
 
-        return PartialView("_BooksListPartial", _mapper.Map<GetAllBookResponse>(response));
-    }
-
-    [Route("/SearchBooks")]
-    public async Task<IActionResult> SearchBooksPartial(string search)
-    {
-        var response = await _mediator.Send(new SearchBookQuery(search));
-
-        return PartialView("_SearchBooksPartial", _mapper.Map<SearchBookResponse>(response));
+        return Ok(_mapper.Map<GetAllBookResponse>(response));
     }
 }

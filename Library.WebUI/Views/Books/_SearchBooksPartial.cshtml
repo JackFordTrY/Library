@@ -1,4 +1,4 @@
-﻿@model SearchBookRequest
+﻿@model SearchBookResponse
 
 @if(Model.Books is null || Model.Books.Count() < 1)
 {
@@ -10,8 +10,8 @@ else
 {
     @foreach(var book in Model.Books){
         <div class="search-item">
-            <p style="margin-bottom: 0;">@book.Title / @book.AuthorName</p>
-            <hr style="margin: 0 0;">
+            <a href="/@book.Title.ToLower()" class="search-item-title">@book.Title</a>
+            <a class="search-item-author" href="#">/ @book.AuthorName</a> <hr>
         </div>
     }
 }

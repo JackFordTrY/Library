@@ -25,32 +25,37 @@
     </div>
     <!---->
     <!--Navbar-->
-    <div class="container-md justify-content-center mb-4">
-        <nav style="padding:5px;" class="navbar navbar-expand-lg navbar-dark bg-dark rounded-bottom-1">
+    <div class="container-md mb-2">
+        <nav class="navbar navbar-expand-lg navbar-dark justify-content-center bg-dark rounded-bottom-1 p-2">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">Main page</a>
-                <ul class="navbar-nav">
-                    <li>
-                        <a class="nav-link" href="/">Books</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Authors</a>
-                    </li>
-                    <li class="nav-item">
-                        <span class="nav-link" style="cursor: pointer;" id="search-toggle">Search</span>
-                    </li>
-                </ul>
-                <div>
-                    @if (!User.Identity.IsAuthenticated)
-                    {
-                        <a class="btn btn-dark" href="/user/login">Log In</a>
-                        <a class="btn btn-secondary" href="/user/register">Sign In</a>
-                    }
-                    else
-                    {
-                        <a class="btn btn-light" href="/user/@User.FindFirst("Name")">My profile</a>
-                        <a class="btn btn-secondary" href="/user/logout">Log out</a>
-                    }
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor02">
+                    <ul class="navbar-nav me-auto">
+                        <li>
+                            <a class="nav-link" href="/">Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Authors</a>
+                        </li>
+                        <li class="nav-item">
+                            <span class="nav-link" style="cursor: pointer;" id="search-toggle">Search</span>
+                        </li>
+                    </ul>
+                    <div>
+                        @if (!User.Identity!.IsAuthenticated)
+                        {
+                            <a class="btn btn-dark" href="/user/login">Log In</a>
+                            <a class="btn btn-secondary" href="/user/register">Sign In</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-light" href="/user/@User.FindFirst("Name")">My profile</a>
+                            <a class="btn btn-secondary" href="/user/logout">Log out</a>
+                        }
+                    </div>
                 </div>
             </div>
         </nav>

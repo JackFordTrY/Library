@@ -5,18 +5,28 @@
     Layout = "_Layout";
 }
 
-<div class="d-flex container-md mb-4">
-    <div class="grid-container" id="gridContainer">
+<div class="d-flex container-md justify-content-center" >
+    <div class="grid-wrap" id="gridwrap" data-scrolls="@Model">
         
     </div>
-</div>
+    <form autocomplete="off">
+    <div class="filter-container">
+        <div class="filter-group">
+            <div class="filter-group__title">
+                Publish year
+            </div>
+            <div class="filter-group__input">
+                <input type="text" name="yearFrom" placeholder="from" />
+                <span> - </span>
+                <input type="text" name="yearTo" placeholder="to" />
+            </div>
+        </div>
 
-<div class="d-flex justify-content-center">
-    <ul class="pagination" id="paginationList" data-pages-amount="@Model">
-
-    </ul>
+        <button type="submit" class="filter-button">Apply filters</button>
+    </div>
+</form>
 </div>
 
 <script src="js/books/list.js"></script>
-
+<script src="js/books/filtering.js"></script>
 

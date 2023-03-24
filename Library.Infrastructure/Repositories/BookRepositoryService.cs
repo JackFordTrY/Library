@@ -17,25 +17,9 @@ public class BookRepositoryService : IBookRepository
 
     public int BookCount { get => _context.Books.Count(); }
 
-    public IEnumerable<Book> GetAllBooks(int page, string sort)
+    public IEnumerable<Book> GetAllBooks(int page, int count)
     {
-        var books = _context.Books.Select(b => b).Include(b => b.Author).Skip((page - 1) * 20).Take(20);
-
-        switch (sort)
-        {
-            case "title":
-                books = books.OrderBy(b => b.Title);
-                break;
-            case "novelti_asc":
-                books = books.OrderBy(b => b.Date);
-                break;
-            case "novelti_des":
-                books = books.OrderByDescending(b => b.Date);
-                break;
-            default:
-                books = books.OrderBy(b => b.Title);
-                break;
-        }
+        var books = _context.Books.Select(b => b).Include(b => b.Author).Skip((page-1) * count).Take(count);
 
         return books.AsEnumerable();
     }

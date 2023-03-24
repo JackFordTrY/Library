@@ -27,7 +27,6 @@ public class GetBookByTitleQueryHandler : IRequestHandler<GetBookByTitleQuery, G
             book.Title,
             book.Date,
             book.Cover,
-            book.Description is null ? string.Empty : book.Description,
             book.Author is null ? string.Empty : book.Author.AuthorName);
 
         return new GetBookByTitleQueryResponse(bookDto);
