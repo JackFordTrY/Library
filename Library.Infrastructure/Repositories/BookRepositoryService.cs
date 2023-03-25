@@ -19,22 +19,27 @@ public class BookRepositoryService : IBookRepository
 
     public IEnumerable<Book> GetAllBooks(int page, int count)
     {
-        var books = _context.Books.Select(b => b).Include(b => b.Author).Skip((page-1) * count).Take(count);
-
-        return books.AsEnumerable();
+        return _context.Books
+            .Select(b => b)
+            .Include(b => b.Author)
+            .Skip((page - 1) * count)
+            .Take(count)
+            .AsEnumerable();
     }
 
     public IEnumerable<Book>? SearchByString(string search)
     {
         if (string.IsNullOrEmpty(search)) return null;
 
-        return _context.Books.Select(b => b).Where(b=>b.Title.ToLower().Contains(search.ToLower())).Include(b => b.Author).AsEnumerable();
+        return _context.Books
+            .Select(b => b)
+            .Where(b => b.Title.ToLower().Contains(search.ToLower()))
+            .Include(b => b.Author)
+            .AsEnumerable();
     } 
 
     public async Task<Book?> GetBookByTitleAsync(string title)
     {
         return await _context.Books.FirstOrDefaultAsync(b => b.Title.ToLower() == title);
     }
-
-    
 }
