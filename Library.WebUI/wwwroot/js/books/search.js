@@ -1,12 +1,12 @@
 const search = document.querySelector(".search");
 
-const toggle = document.querySelector(".search-toggle");
-
 const input = document.querySelector(".search-input");
 
-const container = document.querySelector(".search-container");
+const searchContainer = document.querySelector(".search-container");
 
-const debounceSearch = debounce(drawSearchResault);
+const toggle = document.querySelector("#search-toggle");
+
+const debounceSearch = debounce(drawSearchResault, 600);
 
 search.addEventListener("click", () => search.classList.toggle("hidden"));
 
@@ -18,7 +18,7 @@ input.addEventListener("input", e => {
     debounceSearch(e.target.value);
 });
 
-container.addEventListener("click", e => e.stopPropagation());
+searchContainer.addEventListener("click", e => e.stopPropagation());
 
 function debounce(cb, delay = 1000){
     let timeout;
@@ -32,9 +32,31 @@ function debounce(cb, delay = 1000){
 }
 
 function drawSearchResault(text) {
-    fetch("/SearchBooks?" + new URLSearchParams({
-        search: text,
+    fetch("/search?" + new URLSearchParams({
+        searchstring: text,
     }))
-    .then(response => response.text())
-    .then(text => container.innerHTML = text);
+    .then(response => response.json())
+    .then(data => {
+
+        if(!data.books || data.books.length < 1){
+            searchContainer.innerHTML = 
+            `
+                <div class="search-item">
+                    <p style="margin-bottom: 0;">Nothing was found!</p>
+                </div>
+            `;
+        }
+        else {
+
+            searchContainer.innerHTML = data.books.map(b =>{
+                return `
+                <div class="search-item">
+                    <a href="/${b.title.toLowerCase()}" class="search-item-title">${b.title}</a>
+                    <a class="search-item-author" href="#">/ ${b.authorName}</a> <hr>
+                </div>
+                `
+            }).join('');
+        }
+
+    });
 }
