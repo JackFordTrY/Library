@@ -2,7 +2,6 @@
 using Library.Application.Books.Queries.BookByTitle;
 using Library.Application.Books.Queries.SearchBook;
 using Library.Application.Common.Exceptions;
-using Library.Application.Interfaces;
 using Library.Contracts.BookContracts;
 using MapsterMapper;
 using MediatR;
@@ -50,5 +49,13 @@ public class BooksController : Controller
         var response = await _mediator.Send(query);
 
         return Ok(_mapper.Map<GetAllBookResponse>(response));
+    }
+
+    [Route("/search")]
+    public async Task<IActionResult> SearchList(SearchBookQuery query)
+    {
+        var response = await _mediator.Send(query);
+
+        return Ok(_mapper.Map<SearchBookResponse>(response));
     }
 }
