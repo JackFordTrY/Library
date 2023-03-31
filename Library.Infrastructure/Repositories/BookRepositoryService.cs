@@ -2,7 +2,7 @@
 using Library.Domain.Entities;
 using Library.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
-using System.Collections;
+using System.Linq.Dynamic.Core;
 
 namespace Library.Infrastructure.Repositories;
 
@@ -17,14 +17,24 @@ public class BookRepositoryService : IBookRepository
 
     public int BookCount { get => _context.Books.Count(); }
 
-    public IEnumerable<Book> GetAllBooks(int page, int count)
+    public IQueryable<Book> GetAllBooks(string order, string direction)
     {
-        return _context.Books
+        var books = _context.Books
             .Select(b => b)
             .Include(b => b.Author)
-            .Skip((page - 1) * count)
-            .Take(count)
-            .AsEnumerable();
+            .AsQueryable();
+            
+        switch (direction)
+        {
+            case "Ascending":
+                books = books.OrderBy(order);
+                break;
+            case "Descending":
+                books = books.OrderBy(order + " desc");
+                break;
+        }
+
+        return books;
     }
 
     public IEnumerable<Book>? SearchByString(string search)
