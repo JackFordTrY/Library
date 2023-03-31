@@ -19,7 +19,7 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, LoginQueryResponse>
 
     public async Task<LoginQueryResponse> Handle(LoginQuery query, CancellationToken cancellationToken)
     {
-        if (await _repository.GetUserByLogin(query.Login) is not User user)
+        if (await _repository.GetUserByLoginAsync(query.Login) is not User user)
         {
             throw new UserNotFoundException();
         }

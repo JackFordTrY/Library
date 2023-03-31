@@ -21,6 +21,4 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.MapGet("/", () => "MainPage");
-
 app.Run();

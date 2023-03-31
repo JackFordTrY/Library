@@ -2,7 +2,7 @@
 
 namespace Library.Contracts.UserContracts;
 
-public class RegisterRequest
+public record RegisterRequest
 {
     [Required(ErrorMessage = "This field can not be empty.")]
     [MaxLength(10, ErrorMessage = "Login maximum length is 10 symbols.")]

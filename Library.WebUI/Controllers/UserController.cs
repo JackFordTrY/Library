@@ -43,6 +43,14 @@ public class UserController : Controller
         return Redirect("/");
     }
 
+    [Route("Logout")]
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync();
+
+        return Redirect("/");
+    }
+
     [Route("Register")]
     public IActionResult Register() => View();
 
