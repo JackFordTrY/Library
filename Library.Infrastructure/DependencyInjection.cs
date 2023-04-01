@@ -11,8 +11,8 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
         services.AddTransient<IPasswordEncryption, PasswordEncryptionService>();
-        services.AddTransient<IUserRepository, UserRepositoryService>();
-        services.AddTransient<IBookRepository, BookRepositoryService>();
+        services.AddScoped<IUserRepository, UserRepositoryService>();
+        services.AddScoped<IBookRepository, BookRepositoryService>();
         services.AddDbContext<ApplicationDbContext>();
 
         return services;
