@@ -3,5 +3,5 @@
 namespace Library.Application.Books.Queries.AllBooks;
 
 public record GetAllBooksQueryResponse(
-    IEnumerable<DisplayBookDto> Books,
+    IEnumerable<BookListDto> Books,
     bool HasNextPage);

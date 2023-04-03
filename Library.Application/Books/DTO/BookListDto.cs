@@ -1,6 +1,6 @@
 ﻿namespace Library.Application.Books.DTO;
 
-public record DisplayBookDto(
+public record BookListDto(
     string Title,
     int Date,
     string Cover,

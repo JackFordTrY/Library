@@ -33,7 +33,7 @@ public class GetAllBooksQueryHandler : IRequestHandler<GetAllBooksQuery, GetAllB
             .Skip((query.Page - 1) * query.CountPerPage)
             .Take(query.CountPerPage);
 
-        var booksDto = books.Select(b => new DisplayBookDto(
+        var booksDto = books.Select(b => new BookListDto(
             b.Title,
             b.Date,
             b.Cover,
@@ -41,7 +41,7 @@ public class GetAllBooksQueryHandler : IRequestHandler<GetAllBooksQuery, GetAllB
 
         return Task.FromResult(new GetAllBooksQueryResponse(
             booksDto, 
-            query.Page<Math.Ceiling(_repository.BookCount/(double)query.CountPerPage
-        )));
+            query.Page < Math.Ceiling(booksDto.Count()/(double)query.CountPerPage)
+            ));
     }
 }
