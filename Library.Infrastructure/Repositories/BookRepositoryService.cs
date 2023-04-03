@@ -15,12 +15,9 @@ public class BookRepositoryService : IBookRepository
         _context = context;
     }
 
-    public int BookCount { get => _context.Books.Count(); }
-
     public IQueryable<Book> GetAllBooks(string order, string direction)
     {
         var books = _context.Books
-            .Select(b => b)
             .Include(b => b.Author)
             .AsQueryable();
             
@@ -42,14 +39,13 @@ public class BookRepositoryService : IBookRepository
         if (string.IsNullOrEmpty(search)) return null;
 
         return _context.Books
-            .Select(b => b)
             .Where(b => b.Title.ToLower().Contains(search.ToLower()))
             .Include(b => b.Author)
             .AsEnumerable();
     } 
 
-    public async Task<Book?> GetBookByTitleAsync(string title)
+    public IQueryable<Book> GetBookByTitle(string title)
     {
-        return await _context.Books.FirstOrDefaultAsync(b => b.Title.ToLower() == title);
+        return _context.Books.Include(b=>b.UsersMarked).Include(b=>b.Author).Where(b => b.Title.ToLower() == title);
     }
 }
