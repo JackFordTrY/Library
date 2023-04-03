@@ -1,9 +1,36 @@
-﻿@model GetBookByTitleRequest
+﻿@model GetBookByTitleResponse
 
 @{
+    ViewBag.Title = Model.Book.Title;
     Layout = "_Layout";
 }
 
-<body>
-    <p>@Model.Book.Title</p>
-</body>
+<div class="container-md pt-2">
+    <div class="info-container">
+        <div class="info-item">
+            <img src="@Model.Book.Cover"/>
+            <div class="info-item-description-short">
+                <div class="description-short-text">
+                    <p>AUTHOR</p>
+                    <p>@Model.Book.AutorName</p>    
+                </div>
+                <div class="description-short-text">
+                    <p>GENRE</p>
+                    <p>@Model.Book.Genre</p>
+                </div>
+                <div class="description-short-text">
+                    <p>YEAR</p>
+                    <p>@Model.Book.Date</p>
+                </div>
+            </div>
+            <button class="btn btn-secondary">Add to list</button>
+        </div>
+        <div class="info-item">
+            <strong>@Model.Book.Title</strong>
+            <div class="description-long-text">
+                <strong>Description</strong>
+                <p>@Model.Book.Description</p>
+            </div>
+        </div>
+    </div>
+</div>

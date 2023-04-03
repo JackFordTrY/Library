@@ -14,7 +14,6 @@ body{
     min-width:1000px;
     text-align:center;
     margin-top: 10px;
-    /*background: #303030;*/
     border-radius:10px;
 }
 
@@ -60,6 +59,13 @@ body{
     }
     .grid-container {
         grid-template-columns: repeat(1,1fr);
+    }
+}
+
+@media(max-width:440px){
+    .d-flex {
+        flex-direction:column-reverse;
+        align-items: center;
     }
 }
 
@@ -217,6 +223,7 @@ body{
     padding: 0 5px;
 }
 
+/*---------LOADER---------*/
 @keyframes mulShdSpin {
     0%, 100% {
         box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
@@ -264,16 +271,95 @@ body{
     transform: translateZ(0);
 }
 
+/*---------SCROLLBAR---------*/
 ::-webkit-scrollbar {
     width: 8px;
 }
 
 ::-webkit-scrollbar-track {
     background: #222222;
+    padding: 5px;
     border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
     border-radius: 5px;
     background: #424242;
+}
+
+/*---------BOOK PAGE---------*/
+.info-container {
+    display:flex;
+    height:700px;
+    border-radius:10px;
+    column-gap: 10px;
+}
+
+.info-item {
+    height: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    background: #303030;
+}
+
+.info-item p{
+    margin:0;
+}
+
+.info-item img{
+    background:white;
+    border: 1.5px solid black;
+    border-radius:30px;
+    height:435px;
+    width: 270px;
+}
+
+.info-item-description-short {
+    margin: 25px 15px;
+}
+
+.description-short-text p:first-child{
+    margin: 0;
+    color: rgb(180, 180, 180);
+    font-size: 10px;
+    line-height: 10px;
+}
+
+.description-short-text p:last-child {
+    margin: 0 0 8px;
+}
+
+.info-item button {
+    position: relative;
+    width: 80%;
+    left:50%;
+    bottom: -3%;
+    transform: translateX(-50%);
+}
+
+.info-item:nth-child(2) {
+    width: 100%;
+}
+
+.info-item strong {
+    font-size: 2rem;
+    padding-left: 5px;
+}
+
+.description-long-text {
+    position:relative;
+    border: 2px solid #808080;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin: 15px 0;
+}
+
+.description-long-text strong{
+    padding: 0 8px;
+    font-size: 1rem;
+    position: absolute;
+    top: 0;
+    transform:translateY(-55%);
+    z-index:10;
+    background: #303030;
 }
