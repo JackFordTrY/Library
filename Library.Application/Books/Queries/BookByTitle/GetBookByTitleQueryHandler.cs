@@ -14,21 +14,26 @@ public class GetBookByTitleQueryHandler : IRequestHandler<GetBookByTitleQuery, G
         _repository = repository;
     }
 
-    public async Task<GetBookByTitleQueryResponse> Handle(GetBookByTitleQuery query, CancellationToken cancellationToken)
+    public Task<GetBookByTitleQueryResponse> Handle(GetBookByTitleQuery query, CancellationToken cancellationToken)
     {
-        var book = await _repository.GetBookByTitleAsync(query.Title);
+        var book = _repository
+            .GetBookByTitle(query.Title)
+            .Select(b => new BookPageDto(
+                b.Title,
+                b.Date,
+                b.UsersMarked.Count,
+                b.Cover,
+                b.Genre,
+                b.Description ?? string.Empty,
+                b.Author == null ? string.Empty : b.Author.AuthorName
+             ))
+            .FirstOrDefault();
 
         if(book is null) 
         {
             throw new BookNotFoundException();
         }
 
-        var bookDto = new DisplayBookDto(
-            book.Title,
-            book.Date,
-            book.Cover,
-            book.Author is null ? string.Empty : book.Author.AuthorName);
-
-        return new GetBookByTitleQueryResponse(bookDto);
+        return Task.FromResult(new GetBookByTitleQueryResponse(book));
     }
 }

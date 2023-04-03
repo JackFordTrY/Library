@@ -40,7 +40,7 @@ public class BooksController : Controller
             return NotFound();
         }
 
-        return View(_mapper.Map<GetBookByTitleRequest>(response));
+        return View(_mapper.Map<GetBookByTitleResponse>(response));
     }
 
     [Route("/list")]
