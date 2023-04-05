@@ -24,4 +24,10 @@ public class Book
     public List<User> UsersMarked { get; set; } = new();
 
     public BookGenre Genre { get; set; }
+
+    public string? EPubLink { get; set; } = string.Empty;
+
+    public string? MobiLink { get; set; } = string.Empty;
+
+    public string? PDFLink { get; set; } = string.Empty;
 }

@@ -9,4 +9,7 @@ public record BookPageDto(
     string Cover,
     BookGenre Genre,
     string Description,
-    string AutorName);
+    string AutorName,
+    string? EPubLink,
+    string? MobiLink,
+    string? PdfLink);

@@ -101,7 +101,7 @@ body{
     left:0;
     right:0;
     text-align:center;
-    z-index:4;
+    z-index:1000;
 }
 
 .search-input {
@@ -278,7 +278,6 @@ body{
 
 ::-webkit-scrollbar-track {
     background: #222222;
-    padding: 5px;
     border-radius: 5px;
 }
 
@@ -347,11 +346,13 @@ body{
 }
 
 .description-long-text {
+    display: flex;
     position:relative;
     border: 2px solid #808080;
     border-radius: 10px;
     padding: 10px 15px;
     margin: 15px 0;
+    text-align: justify;
 }
 
 .description-long-text strong{
@@ -362,4 +363,17 @@ body{
     transform:translateY(-55%);
     z-index:10;
     background: #303030;
+}
+
+.description-long-text img{
+    border: none;
+    border-radius: 0;
+    background: #303030;
+    width:38px;
+    height:40px;
+}
+
+.description-long-text a{
+    text-underline-offset:3px;
+    margin: 0 auto;
 }

@@ -1,35 +1,45 @@
 ﻿@model GetBookByTitleResponse
 
 @{
-    ViewBag.Title = Model.Book.Title;
+    ViewBag.Title = Model.Title;
     Layout = "_Layout";
-}
+    string count = Model.ReadersCount > 10000 ? "10000+" : Model.ReadersCount.ToString();
+    string epubMessage = string.IsNullOrEmpty(Model.EPubLink) ? "Not available" : "Download .epub";
+    string mobiMessage = string.IsNullOrEmpty(Model.MobiLink) ? "Not available" : "Download .mobi";
+    string pdfMessage = string.IsNullOrEmpty(Model.PdfLink) ? "Not available" : "Download .pdf";
+} 
 
 <div class="container-md pt-2">
     <div class="info-container">
         <div class="info-item">
-            <img src="@Model.Book.Cover"/>
+            <img src="@Model.Cover"/>
             <div class="info-item-description-short">
                 <div class="description-short-text">
                     <p>AUTHOR</p>
-                    <p>@Model.Book.AutorName</p>    
+                    <p>@Model.AutorName</p>    
                 </div>
                 <div class="description-short-text">
                     <p>GENRE</p>
-                    <p>@Model.Book.Genre</p>
+                    <p>@Model.Genre</p>
                 </div>
                 <div class="description-short-text">
                     <p>YEAR</p>
-                    <p>@Model.Book.Date</p>
+                    <p>@Model.Date</p>
                 </div>
             </div>
-            <button class="btn btn-secondary">Add to list</button>
+            <button class="btn btn-light">Read with <span style="font-size: 18px;">@count</span> others</button>
         </div>
         <div class="info-item">
-            <strong>@Model.Book.Title</strong>
+            <strong>@Model.Title</strong>
             <div class="description-long-text">
                 <strong>Description</strong>
-                <p>@Model.Book.Description</p>
+                <p>@Model.Description</p>
+            </div>
+            <div class="description-long-text">
+                <strong>Download links</strong>
+                <a href="@Model.EPubLink" target="_blank"><img src="/images/icon_epub.png" />@epubMessage</a>
+                <a href="@Model.MobiLink" target="_blank"><img src="/images/icon_mobi.png" />@mobiMessage</a>
+                <a href="@Model.PdfLink" target="_blank"><img src="/images/icon_pdf.png" />@pdfMessage</a>
             </div>
         </div>
     </div>

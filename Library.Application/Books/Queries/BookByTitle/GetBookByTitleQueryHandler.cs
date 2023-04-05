@@ -25,7 +25,10 @@ public class GetBookByTitleQueryHandler : IRequestHandler<GetBookByTitleQuery, G
                 b.Cover,
                 b.Genre,
                 b.Description ?? string.Empty,
-                b.Author == null ? string.Empty : b.Author.AuthorName
+                b.Author == null ? string.Empty : b.Author.AuthorName,
+                b.EPubLink,
+                b.MobiLink,
+                b.PDFLink
              ))
             .FirstOrDefault();
 

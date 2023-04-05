@@ -23,28 +23,16 @@ window.addEventListener("scroll", () => {
         && isAvailable
     )
     {
-        console.log("scroll fired");
-        isAvailable = !isAvailable;
-
         formData.set("page", currentPage);
 
-        fetch("/list", {
-            method: "POST",
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.hasNextPage) {
-                currentPage++;
-                isAvailable = !isAvailable;
-            }
-            updateList(data.books);
-        });
+        fetchBooks();
     }
 });
 
 applyButton.addEventListener("click", (e) => {
     e.preventDefault();
+
+    gridContainer.innerHTML = "";
 
     currentPage = 1;
 
@@ -74,19 +62,25 @@ applyButton.addEventListener("click", (e) => {
         formData.set("genreFilters", JSON.stringify(genres));
     }
 
+    fetchBooks();
+});
+
+function fetchBooks() {
+    isAvailable = false;
+
     fetch("/list?", {
         method: "POST",
         body: formData
     })
     .then(response => response.json())
-    .then(data=>{
+    .then(data => {
         if (data.hasNextPage) {
             currentPage++;
             isAvailable = true;
         }
-        updateList(data.books, currentPage - 1 == 1);
-    })
-});
+        updateList(data.books);
+    });
+}
 
 function loadList() {
     if (currentPage == 1) {
@@ -123,7 +117,7 @@ function loadList() {
 };
 
 
-function updateList(books, rerender = false) {
+function updateList(books) {
     const booksHtml = books.map(b =>
         `
             <div class="grid-item">
@@ -136,10 +130,5 @@ function updateList(books, rerender = false) {
         `
     ).join('');
 
-    if (rerender) {
-        gridContainer.innerHTML = booksHtml;
-    }
-    else {
-        gridContainer.innerHTML += booksHtml;
-    }
+    gridContainer.innerHTML += booksHtml;
 }
