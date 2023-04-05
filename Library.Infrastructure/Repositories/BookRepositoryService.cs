@@ -15,6 +15,8 @@ public class BookRepositoryService : IBookRepository
         _context = context;
     }
 
+    public int BooksCount { get => _context.Books.Count(); }
+
     public IQueryable<Book> GetAllBooks(string order, string direction)
     {
         var books = _context.Books
