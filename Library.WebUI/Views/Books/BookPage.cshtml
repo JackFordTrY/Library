@@ -27,7 +27,7 @@
                     <p>@Model.Date</p>
                 </div>
             </div>
-            <button class="btn btn-light">Read with <span style="font-size: 18px;">@count</span> others</button>
+            <button class="btn btn-light" id="addtoread">Read with <span style="font-size: 18px;">@count</span> others</button>
         </div>
         <div class="info-item">
             <strong>@Model.Title</strong>
@@ -37,10 +37,12 @@
             </div>
             <div class="description-long-text">
                 <strong>Download links</strong>
-                <a href="@Model.EPubLink" target="_blank"><img src="/images/icon_epub.png" />@epubMessage</a>
-                <a href="@Model.MobiLink" target="_blank"><img src="/images/icon_mobi.png" />@mobiMessage</a>
-                <a href="@Model.PdfLink" target="_blank"><img src="/images/icon_pdf.png" />@pdfMessage</a>
+                <a href="@Model.EPubLink" target="_blank"><img src="/images/icon_epub.png" /><span>@epubMessage</span></a>
+                <a href="@Model.MobiLink" target="_blank"><img src="/images/icon_mobi.png" /><span>@mobiMessage</span></a>
+                <a href="@Model.PdfLink" target="_blank"><img src="/images/icon_pdf.png" /><span>@pdfMessage</span></a>
             </div>
         </div>
     </div>
 </div>
+
+<script src="~/js/books/read.js"></script>

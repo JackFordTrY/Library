@@ -1,6 +1,6 @@
 let currentPage = 1;
 
-let isAvailable = true;
+let isAvailable = false;
 
 let gridContainer;
 
@@ -110,6 +110,7 @@ function loadList() {
         `;
         if (data.hasNextPage) {
             currentPage++;
+            isAvailable = true;
         }
         gridContainer = document.getElementById("gridcontainer")
         updateList(data.books)

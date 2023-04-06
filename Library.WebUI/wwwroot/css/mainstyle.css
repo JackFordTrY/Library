@@ -353,6 +353,12 @@ body{
     padding: 10px 15px;
     margin: 15px 0;
     text-align: justify;
+    max-height: 250px;
+}
+
+.description-long-text p{
+    padding-right: 5px;
+    overflow-y:auto;
 }
 
 .description-long-text strong{
@@ -361,7 +367,7 @@ body{
     position: absolute;
     top: 0;
     transform:translateY(-55%);
-    z-index:10;
+    z-index:100;
     background: #303030;
 }
 
@@ -376,4 +382,26 @@ body{
 .description-long-text a{
     text-underline-offset:3px;
     margin: 0 auto;
+}
+
+@media(max-width:992px){
+    .description-long-text span {
+        display:none;
+    }
+}
+@media(max-width:480px){
+    .info-container{
+        margin:0 auto;
+        flex-direction: column;
+        width: 320px;
+        row-gap: 10px;
+    }
+
+    .container-md{
+        padding: 0;
+    }
+
+    #addtoread{
+        bottom: 0;
+    }
 }
