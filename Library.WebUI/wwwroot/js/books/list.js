@@ -4,13 +4,15 @@ let isAvailable = false;
 
 let gridContainer;
 
-const gridWrap = document.getElementById("gridwrap");
+const gridWrap = document.querySelector(".grid-wrap");
 
 const filterContainer = document.querySelector(".filter-container");
 
 const dropdownItems = document.querySelectorAll(".dropdown-item");
 
 const applyButton = document.querySelector(".filter-button.apply");
+
+const clearButton = document.querySelector(".filter-button.clear");
 
 const formData = new FormData();
 
@@ -58,9 +60,7 @@ applyButton.addEventListener("click", (e) => {
 
     document.querySelectorAll("input[name=\"genre\"]:checked").forEach((e)=> genres.push(+e.value));
 
-    if (genres.length > 0) {
-        formData.set("genreFilters", JSON.stringify(genres));
-    }
+    formData.set("genreFilters", JSON.stringify(genres));
 
     fetchBooks();
 });
@@ -68,7 +68,7 @@ applyButton.addEventListener("click", (e) => {
 function fetchBooks() {
     isAvailable = false;
 
-    fetch("/list?", {
+    fetch("/list", {
         method: "POST",
         body: formData
     })
@@ -106,13 +106,13 @@ function loadList() {
     .then(data => {
         gridWrap.innerHTML =
         `
-            <div class="grid-container" id="gridcontainer"></div>
+            <div class="grid-container"></div>
         `;
         if (data.hasNextPage) {
             currentPage++;
             isAvailable = true;
         }
-        gridContainer = document.getElementById("gridcontainer")
+        gridContainer = document.querySelector(".grid-container")
         updateList(data.books)
     });
 };

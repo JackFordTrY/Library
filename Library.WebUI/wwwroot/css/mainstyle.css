@@ -9,6 +9,26 @@ body{
    margin: 0;
 }
 
+/*---------NAVBAR---------*/
+
+.navbar-collapse ul + div {
+    display: flex;
+}
+
+@media(max-width: 992px){
+    .navbar-collapse ul + div {
+        display: flex;
+        flex-direction:column;
+    }
+    .navbar-collapse ul + div > a:nth-child(1) {
+        width: 98px;
+    }
+    .navbar-collapse ul + div > a:nth-child(2) {
+        width: 98px;
+    }
+}
+
+
 /*---------GRID---------*/
 .grid-wrap{
     min-width:1000px;
@@ -143,6 +163,10 @@ body{
     width:580px;
 }
 
+.search-item:last-child hr {
+    display: none;
+}
+
 /*---------FILTERING---------*/
 .filter-wrap {
     display: flex;
@@ -201,7 +225,8 @@ body{
 
 .filter-group__input input {
     border: 1px solid rgb(133,133,133);
-    padding: 3px;
+    border-radius: 10px;
+    padding: 3px 5px;
     width: 1%;
     flex: 1 1 auto;
 }
@@ -219,8 +244,8 @@ body{
 .genre-container {
     background: #222222;
     border: 3px solid rgb(23, 23, 23);
-    border-radius: 2px;
-    padding: 0 5px;
+    border-radius: 10px;
+    padding: 4px 8px;
 }
 
 /*---------LOADER---------*/
@@ -389,6 +414,7 @@ body{
         display:none;
     }
 }
+
 @media(max-width:480px){
     .info-container{
         margin:0 auto;
@@ -404,4 +430,85 @@ body{
     #addtoread{
         bottom: 0;
     }
+}
+
+/*---------CHECKBOX---------*/
+
+.genre-container label{
+    width: 145px;
+    height: 23px;
+
+}
+
+.control {
+    font-family: arial;
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 2px;
+    padding-top: 2px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.control input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.control_indicator {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background: #cccccc;
+    border: 0px solid #000000;
+    border-radius: 10px;
+}
+
+.control:hover input ~ .control_indicator,
+.control input:focus ~ .control_indicator {
+    background: #cccccc;
+}
+
+.control input:checked ~ .control_indicator {
+    background: #0fa114;
+}
+
+.control:hover input:not([disabled]):checked ~ .control_indicator,
+.control input:checked:focus ~ .control_indicator {
+    background: #0fa114;
+}
+
+.control input:disabled ~ .control_indicator {
+    background: #e6e6e6;
+    opacity: 6;
+    pointer-events: none;
+}
+
+.control_indicator:after {
+    box-sizing: unset;
+    content: '';
+    position: absolute;
+    display: none;
+}
+
+.control input:checked ~ .control_indicator:after {
+    display: block;
+}
+
+.control-checkbox .control_indicator:after {
+    left: 8px;
+    top: 4px;
+    width: 3px;
+    height: 8px;
+    border: solid #ffffff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.control-checkbox input:disabled ~ .control_indicator:after {
+    border-color: #7b7b7b;
 }

@@ -25,7 +25,7 @@ public class GetAllBooksQueryHandler : IRequestHandler<GetAllBooksQuery, GetAllB
 
         if (query.YearTo > 0) books = books.Where(b => b.Date <= query.YearTo);
         
-        if (query.GenreFilters.Length > 0) books = books.Where(b => 
+        if (query.GenreFilters.Length > 2) books = books.Where(b => 
             JsonConvert.DeserializeObject<int[]>(query.GenreFilters)!.Contains((int)b.Genre
         ));
 
