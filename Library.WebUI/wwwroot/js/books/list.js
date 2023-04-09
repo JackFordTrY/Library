@@ -34,9 +34,9 @@ window.addEventListener("scroll", () => {
 applyButton.addEventListener("click", (e) => {
     e.preventDefault();
 
-    gridContainer.innerHTML = "";
-
     currentPage = 1;
+
+    isValid = true;
 
     formData.set("page", currentPage);
 
@@ -51,9 +51,15 @@ applyButton.addEventListener("click", (e) => {
     if (!isNaN(document.querySelector("input[name=\"yearFrom\"]").value)) {
         formData.set("yearFrom", document.querySelector("input[name=\"yearFrom\"]").value);
     }
+    else {
+        isValid = false;
+    }
 
     if (!isNaN(document.querySelector("input[name=\"yearTo\"]").value)) {
         formData.set("yearTo", document.querySelector("input[name=\"yearTo\"]").value);
+    }
+    else {
+        isValid = false;
     }
 
     let genres = [];
@@ -62,7 +68,13 @@ applyButton.addEventListener("click", (e) => {
 
     formData.set("genreFilters", JSON.stringify(genres));
 
-    fetchBooks();
+    if (isValid) {
+        gridContainer.innerHTML = "";
+        fetchBooks();
+    }
+    else {
+        notificate("Pleas enter correct value!");
+    }
 });
 
 function fetchBooks() {
@@ -98,7 +110,7 @@ function loadList() {
 
     formData.set("direction", "Ascending")
 
-    fetch("/list?", {
+    fetch("/list", {
         method: "POST",
         body: formData
     })
