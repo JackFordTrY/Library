@@ -46,11 +46,6 @@ public class BooksController : Controller
     [Route("/list")]
     public async Task<IActionResult> BookList(GetAllBooksQuery query)
     {
-        if(Request.Headers["referer"] != "https://localhost:7229/")
-        {
-            return StatusCode(405);
-        }
-
         var response = await _mediator.Send(query);
 
         return Ok(_mapper.Map<GetAllBookResponse>(response));
@@ -59,10 +54,6 @@ public class BooksController : Controller
     [Route("/search")]
     public async Task<IActionResult> SearchList(SearchBookQuery query)
     {
-        if (Request.Headers["referer"] != "https://localhost:7229/")
-        {
-            return StatusCode(405);
-        }
         var response = await _mediator.Send(query);
 
         return Ok(_mapper.Map<SearchBookResponse>(response));
