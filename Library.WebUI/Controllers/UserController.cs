@@ -1,10 +1,12 @@
 ﻿using Library.Application.Common.Exceptions;
 using Library.Application.Users.Commands.Register;
 using Library.Application.Users.Queries.Login;
+using Library.Application.Users.Queries.Profile;
 using Library.Contracts.UserContracts;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.WebUI.Controllers;
@@ -69,5 +71,19 @@ public class UserController : Controller
         }
 
         return Redirect("/");
+    }
+    
+    [Route("")]
+    [Authorize]
+    public async Task<IActionResult> Profile()
+    {
+        var query = new ProfileQuery()
+        {
+            Login = User.Identity!.Name!
+        }; 
+
+        var response = await _mediator.Send(query);
+
+        return View(response);
     }
 }

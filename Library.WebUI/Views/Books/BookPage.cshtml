@@ -1,4 +1,5 @@
-﻿@model GetBookByTitleResponse
+﻿@using System.Text;
+@model GetBookByTitleResponse
 
 @{
     ViewBag.Title = Model.Title;
@@ -7,6 +8,16 @@
     string epubMessage = string.IsNullOrEmpty(Model.EPubLink) ? "Not available" : "Download .epub";
     string mobiMessage = string.IsNullOrEmpty(Model.MobiLink) ? "Not available" : "Download .mobi";
     string pdfMessage = string.IsNullOrEmpty(Model.PdfLink) ? "Not available" : "Download .pdf";
+
+    StringBuilder builder = new StringBuilder();
+
+    foreach (char c in Model.Genre.ToString())
+    {
+        if (Char.IsUpper(c) && builder.Length > 0) builder.Append(' ');
+        builder.Append(c);
+    }
+
+    string genre = builder.ToString();
 } 
 
 <div class="container-md pt-2">
@@ -15,25 +26,36 @@
             <img src="@Model.Cover"/>
             <div class="info-item-description-short">
                 <div class="description-short-text">
-                    <p>AUTHOR</p>
+                    <p>АВТОР</p>
                     <p>@Model.AutorName</p>    
                 </div>
                 <div class="description-short-text">
-                    <p>GENRE</p>
-                    <p>@Model.Genre</p>
+                    <p>ЖАНР</p>
+                    <p>@genre</p>
                 </div>
                 <div class="description-short-text">
-                    <p>YEAR</p>
+                    <p>РІК</p>
                     <p>@Model.Date</p>
                 </div>
             </div>
-            <button class="btn btn-light" id="addtoread">Read with <span style="font-size: 18px;">@count</span> others</button>
+            @if (!Model.IsInList)
+            {
+                <button class="btn btn-light" id="list-control">Read with <span style="font-size: 18px;">@count</span> others</button>
+            }
+            else
+            {
+                <button class="btn btn-danger" id="list-control">Delete from list</button>
+            }
         </div>
         <div class="info-item">
-            <strong>@Model.Title</strong>
+            <strong id="title">@Model.Title</strong>
             <div class="description-long-text">
                 <strong>Description</strong>
                 <p>@Model.Description</p>
+            </div>
+            <div class="description-long-text">
+                <strong>Опис до книги</strong>
+                <p>@Model.UaDescription</p>
             </div>
             <div class="description-long-text">
                 <strong>Download links</strong>

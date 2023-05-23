@@ -1,5 +1,7 @@
-﻿namespace Library.Contracts.UserContracts;
+﻿using Library.Domain.Entities;
+
+namespace Library.Contracts.UserContracts;
 
 public record ProfileResponse(
     string Login,
-    string ProfilePicture);
+    List<Book> Books);

@@ -23,7 +23,7 @@ public class UserRepositoryService : IUserRepository
 
     public async Task<User?> GetUserByLoginAsync(string username)
     {
-        return await _context.Users.FirstOrDefaultAsync(u => u.Login == username);
+        return await _context.Users.Include(user => user.BooksMarked).FirstOrDefaultAsync(u => u.Login == username);
     }
 
     public async Task<bool> UserExistsAsync(string username, string email)

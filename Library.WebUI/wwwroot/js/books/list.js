@@ -1,4 +1,4 @@
-let currentPage = 1;
+﻿let currentPage = 1;
 
 let isAvailable = false;
 
@@ -73,7 +73,7 @@ applyButton.addEventListener("click", (e) => {
         fetchBooks();
     }
     else {
-        notificate("Pleas enter correct value!");
+        notificate("Введіть коректне значення!", false);
     }
 });
 

@@ -1,10 +1,13 @@
-﻿using Library.Application.Books.Queries.AllBooks;
+﻿using Library.Application.Books.Commands.AddToList;
+using Library.Application.Books.Commands.DeleteFromList;
+using Library.Application.Books.Queries.AllBooks;
 using Library.Application.Books.Queries.BookByTitle;
 using Library.Application.Books.Queries.SearchBook;
 using Library.Application.Common.Exceptions;
 using Library.Contracts.BookContracts;
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.WebUI.Controllers;
@@ -33,7 +36,7 @@ public class BooksController : Controller
 
         try
         {
-            response = await _mediator.Send(new GetBookByTitleQuery(title));
+            response = await _mediator.Send(new GetBookByTitleQuery(title, User.Identity!.Name!));
         }
         catch (BookNotFoundException)
         {
@@ -57,5 +60,33 @@ public class BooksController : Controller
         var response = await _mediator.Send(query);
 
         return Ok(_mapper.Map<SearchBookResponse>(response));
+    }
+
+    [Authorize]
+    [Route("/addtolist")]
+    public async Task<IActionResult> AddToList(string title)
+    {
+        var request = new AddToListCommand(title, User.Identity!.Name!);
+
+        if(await _mediator.Send(request))
+        {
+            return Ok();
+        }
+        
+        return StatusCode(406);
+    }
+
+    [Authorize]
+    [Route("/deletefromlist")]
+    public async Task<IActionResult> DeleteFromList(string title)
+    {
+        var request = new DeleteFromListCommand(title, User.Identity!.Name!);
+
+        if (await _mediator.Send(request))
+        {
+            return Ok();
+        }
+
+        return StatusCode(406);
     }
 }

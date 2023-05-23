@@ -1,6 +1,25 @@
-﻿@model ProfileResponse
+﻿@using Library.Application.Users.Queries.Profile;
+@model ProfileQueryResponse
 @{
     Layout = "_Layout";
 }
 
-<p>@Model.Login</p>
+<div class="d-flex container-md justify-content-center">
+    <div class="grid-wrap">
+        <h1>Особистий список</h1>
+        <hr style="border:none;height:8px;color:#3e3f3a;background-color:#3e3f3a" />
+        <div class="grid-container">
+            @foreach(var item in Model.Books)
+            {
+                <div class="grid-item">
+                    <a href="/@item.Title.ToLower()"><img src="@item.Cover" height="141" width="87" alt="@item.Title"></a>
+                    <br>
+                    <a class="grid-item-text-link" href="/@item.Title.ToLower()" aria-label="@item.Title">@item.Title</a>
+                    <br>
+                    <p style="color:white;">@item.Date</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

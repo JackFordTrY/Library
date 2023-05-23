@@ -11,4 +11,8 @@ public interface IBookRepository
     IEnumerable<Book>? SearchByString(string search);
 
     IQueryable<Book> GetBookByTitle(string title);
+
+    Task<bool> AddToListAsync(string title, User user);
+
+    Task<bool> DeleteFromListAsync(string title, User user);    
 }

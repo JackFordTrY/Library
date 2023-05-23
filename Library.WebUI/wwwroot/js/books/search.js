@@ -51,8 +51,7 @@ function drawSearchResault(text) {
             searchContainer.innerHTML = data.books.map(b =>{
                 return `
                 <div class="search-item">
-                    <a href="/${b.title.toLowerCase()}" class="search-item-title">${b.title}</a>
-                    <a class="search-item-author" href="#">/ ${b.authorName}</a> <hr>
+                    <a href="/${b.title.toLowerCase()}" class="search-item-title">${b.title}<span class="search-item-author"> / ${b.authorName}</span></a> <hr>
                 </div>
                 `
             }).join('');

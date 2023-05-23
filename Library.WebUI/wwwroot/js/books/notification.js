@@ -8,8 +8,7 @@ function notificationFunction()
 {
 	let block = false;
 
-	return (text) => {
-		console.log(block);
+	return (text, isGood) => {
 		if (!block) {
 
 			block = true;
@@ -18,6 +17,13 @@ function notificationFunction()
 
 			notification.classList.toggle("hidden");
 
+			if (isGood) {
+				goodNtf();
+			}
+			else {
+				badNtf();
+			}
+
 			setTimeout(() => {
 				notification.classList.toggle("hidden");
 
@@ -25,4 +31,18 @@ function notificationFunction()
 			},1000);
 		}
 	}
+}
+
+function goodNtf() {
+	notification.classList.toggle("ntf-good");
+	setTimeout(() => {
+		notification.classList.toggle("ntf-good");
+	}, 1000);
+}
+
+function badNtf() {
+	notification.classList.toggle("ntf-danger");
+	setTimeout(() => {
+		notification.classList.toggle("ntf-danger");
+	}, 1000);
 }

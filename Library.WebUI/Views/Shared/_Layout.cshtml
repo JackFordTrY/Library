@@ -6,7 +6,7 @@
     <title>MyLib | @ViewBag.Title</title>
 
 
-   <link rel="stylesheet" href="~/css/bootstrap.css" />
+    <link rel="stylesheet" href="https://bootswatch.com/5/sandstone/bootstrap.css" />
 
    <link rel="stylesheet" href="~/css/mainstyle.css" />
 
@@ -35,25 +35,22 @@
                 <div class="collapse navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav me-auto">
                         <li>
-                            <a class="nav-link" href="/">Books</a>
+                            <a class="nav-link" href="/">Книжки</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/">Authors</a>
-                        </li>
-                        <li class="nav-item">
-                            <span class="nav-link" style="cursor: pointer;" id="search-toggle">Search</span>
+                            <span class="nav-link" style="cursor: pointer;" id="search-toggle">Пошук</span>
                         </li>
                     </ul>
                     <div>
                         @if (!User.Identity!.IsAuthenticated)
                         {
-                            <a class="btn btn-dark" href="/user/login">Log In</a>
-                            <a class="btn btn-secondary" href="/user/register">Register</a>
+                            <a class="btn btn-dark" href="/user/login">Увійти</a>
+                            <a class="btn btn-secondary" href="/user/register">Реєстрація</a>
                         }
                         else
                         {
-                            <a class="btn btn-light" href="/user/@User.FindFirst("Name")">My profile</a>
-                            <a class="btn btn-secondary" href="/user/logout">Log out</a>
+                            <a class="btn btn-light" href="/user/@User.FindFirst("Name")">Профіль</a>
+                            <a class="btn btn-secondary" href="/user/logout">Вийти</a>
                         }
                     </div>
                 </div>

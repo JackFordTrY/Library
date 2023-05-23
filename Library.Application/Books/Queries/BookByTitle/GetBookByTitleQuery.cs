@@ -3,4 +3,5 @@
 namespace Library.Application.Books.Queries.BookByTitle; 
 
 public record GetBookByTitleQuery(
-    string Title) : IRequest<GetBookByTitleQueryResponse>;
+    string Title,
+    string Username) : IRequest<GetBookByTitleQueryResponse>;

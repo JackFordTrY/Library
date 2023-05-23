@@ -48,6 +48,37 @@ public class BookRepositoryService : IBookRepository
 
     public IQueryable<Book> GetBookByTitle(string title)
     {
-        return _context.Books.Include(b=>b.UsersMarked).Include(b=>b.Author).Where(b => b.Title.ToLower() == title);
+        return _context.Books
+            .Include(b => b.UsersMarked)
+            .Include(b => b.Author)
+            .Where(b => b.Title.ToLower() == title);
+    }
+
+    public async Task<bool> AddToListAsync(string title, User user)
+    {
+        var book = await _context.Books.Include(b=>b.UsersMarked).FirstAsync(b => b.Title == title);
+
+        if (!book.UsersMarked.Contains(user))
+        {
+            book.UsersMarked.Add(user);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        return false;
+    }
+
+    public async Task<bool> DeleteFromListAsync(string title, User user)
+    {
+        var book = await _context.Books.Include(b => b.UsersMarked).FirstAsync(b => b.Title == title);
+
+        if (book.UsersMarked.Contains(user))
+        {
+            book.UsersMarked.Remove(user);
+            _context.SaveChanges();
+            return true;
+        }
+
+        return false;
     }
 }
