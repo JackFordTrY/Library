@@ -8,7 +8,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
-        builder.Property(b => b.ProfilePicture)
-               .HasDefaultValue("/images/default-user-img.jpg");
+
     }
 }
